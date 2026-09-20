@@ -37,8 +37,17 @@ k6.exe v2.2.0 (commit/00a9a1b7f5, go1.26.5, windows/amd64)
 3. **Availability & Error Budget:** 2 минутын (120 секунд) цонход 90% availability гэдэг нь **12 секундээр тооцсон Error Budget** өгч байна. Серверийг 10 секунд зогсооход энэ цагийн budget-д багтана.
 4. **Цагийн ба Хүсэлтийн budget-ийн зөрүү:** k6-ийн `checks` нь цагаар биш **ХҮСЭЛТИЙН тоогоор** тооцдог. Сервер унасан үед хүсэлт агшин зуур (Connection Refused / 0ms) буцдаг тул сааталтай (200-400ms) хэвийн секундээс илүү олон хүсэлт 1 секундэд амжиж унадаг. Тиймээс хүсэлтээр тооцсон алдааны хувь цагаар тооцсон 10 секундийн (8.3%) харьцаанаас өөр гардаг.
 
-`results/pass.txt`
+`results/pass.txt` — эхний 3 threshold (`checks`, `cart`, `pay`) PASS.
 `docs/pass.png`
+
+/report-д зориулсан 4 дэх threshold (Алхам 4) нэмэгдсэний дараах бүрэн PASS гаралт: `results/pass-report.txt`, `docs/pass-report.png`
+```text
+  THRESHOLDS
+   checks ..........................: ✓ 'rate>0.90' rate=98.26%
+   http_req_duration{name:cart} ....: ✓ 'p(95)<50'  p(95)=2.65ms
+   http_req_duration{name:report} ..: ✓ 'p(95)<450' p(95)=396.66ms
+   http_req_failed{name:pay} .......: ✓ 'rate<0.08' rate=5.19%
+```
 
 ## 3. Chaos туршилт ба Ажиглалтын Дүгнэлт (Алхам 5)
 
